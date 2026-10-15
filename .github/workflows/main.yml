@@ -1,4 +1,3 @@
-
 name: Build Spindle APK
 
 on:
@@ -23,9 +22,8 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
-
-      - name: Install Android SDK packages
-        run: sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+        with:
+          packages: 'platform-tools platforms;android-36 build-tools;36.0.0'
 
       - name: Build debug APK
         run: chmod +x gradlew && ./gradlew :app:assembleDebug
@@ -37,4 +35,3 @@ jobs:
           path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
           retention-days: 7
-          
